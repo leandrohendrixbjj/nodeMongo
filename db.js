@@ -12,12 +12,10 @@ mongoClient.connect('mongodb://localhost:27017',
         console.log('Connected successfully');
     });
 
-function findSerie(callback) {
+function findSerie() {
     return global.connection
         .collection('series')
         .find({})
-        .toArray((error, data) => {
-            callback(error, data)
-        });
+        .toArray();
 }
 module.exports = { findSerie }

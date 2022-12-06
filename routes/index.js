@@ -6,12 +6,12 @@ const db = require('../db.js');
 /* GET home page. */
 router.get('/', (req, res, next) => {
 
-  db.findSerie((error, data) => {
-    if (error) return console.log(`Error:${error}`);
+  db.findSerie().then((data) => {
     console.log(data);
-  });
+    res.render('index', { title: 'ExpressA' });
+  }).catch(error => console.log(`Error:${error}`));
 
-  res.render('index', { title: 'ExpressA' });
+
 });
 
 module.exports = router;
