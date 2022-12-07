@@ -6,11 +6,9 @@ const db = require('../db.js');
 /* GET home page. */
 router.get('/', (req, res, next) => {
 
-  db.findSerie().then((data) => {
-    console.log(data);
-    res.render('index', { title: 'ExpressA' });
+  db.findSerie().then((series) => {
+    res.render('index', { title: 'ExpressA', series: series });
   }).catch(error => console.log(`Error:${error}`));
-
 
 });
 
