@@ -1,8 +1,8 @@
 console.clear();
-const express = require('express');
-const Customer = require('../model/customer.js');
-const router = express.Router();
 
+const express = require('express');
+const router = express.Router();
+const Customer = require('../model/customer.js');
 
 /* GET home page. */
 router.get('/', async (req, res, next) => {

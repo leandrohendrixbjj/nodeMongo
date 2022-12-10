@@ -14,15 +14,30 @@
   </h1>
   <p>Welcome to <%= title %>
   </p>
-  <p>
-  <ul>
+  <table>
+    <thead>
+      <tr>
+        <td>Nome</td>
+        <td>Idade</td>
+        <td>Ações</td>
+      </tr>
+    </thead>
     <% series.forEach(serie=> { %>
-      <li>
-        <%=serie.nome%>
-      </li>
+      <tbody>
+        <tr>
+          <td>
+            <%=serie.nome%>
+          </td>
+          <td>
+            <%=serie.idade%>
+          </td>
+          <td>
+            Ações
+          </td>
+        </tr>
+      </tbody>
       <%})%>
-  </ul>
-  </p>
+  </table>
 </body>
 
 </html>

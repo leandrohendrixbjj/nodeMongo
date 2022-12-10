@@ -6,3 +6,12 @@ body {
 a {
   color: #00B7FF;
 }
+
+table thead tr {
+  background-color: #CCC;
+}
+
+table tr:hover {
+  cursor: pointer;
+  background-color: #CCC;
+}
