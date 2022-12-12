@@ -3,14 +3,14 @@ const ObjectId = require('mongodb').ObjectId;
 
 function findSerie() {
     return connection
-        .collection('series')
+        .collection('Customers')
         .find({})
         .toArray();
 }
 
 function insertCustomer(customer) {
     return global.collection
-        .collection('series')
+        .collection('Customers')
         .insertOne(customer);
 }
 
@@ -19,7 +19,7 @@ function updateCustomer(id, customer) {
     const objectId = new ObjectId(id);
 
     return global.collection
-        .collection('series')
+        .collection('Customers')
         .updateOne({ _id: objectId }, { $set: customer })
 }
 
@@ -27,7 +27,7 @@ function deleteCustomer(id) {
     const objectId = new ObjectId(id);
 
     return global.collection
-        .collection('series')
+        .collection('Customers')
         .deleteOne({ _id: objectId })
 }
 

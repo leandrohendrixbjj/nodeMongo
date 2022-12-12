@@ -7,8 +7,8 @@ const Customer = require('../model/customer.js');
 /* GET home page. */
 router.get('/', async (req, res, next) => {
 
-  Customer.findSerie().then((series) => {
-    res.render('index', { title: 'ExpressA', series: series });
+  Customer.findSerie().then((customers) => {
+    res.render('index', { title: 'ExpressA', customers: customers });
   }).catch(error => console.log(`Error:${error}`));
 
 });

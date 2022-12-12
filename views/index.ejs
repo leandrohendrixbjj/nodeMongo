@@ -19,17 +19,21 @@
       <tr>
         <td>Nome</td>
         <td>Idade</td>
+        <td>Sexo</td>
         <td>Ações</td>
       </tr>
     </thead>
-    <% series.forEach(serie=> { %>
+    <% customers.forEach(customer=> { %>
       <tbody>
         <tr>
           <td>
-            <%=serie.nome%>
+            <%=customer.nome%>
           </td>
           <td>
-            <%=serie.idade%>
+            <%=customer.idade%>
+          </td>
+          <td>
+            <%=customer.sexo%>
           </td>
           <td>
             Ações
