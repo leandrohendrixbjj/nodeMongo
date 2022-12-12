@@ -13,4 +13,8 @@ router.get('/', async (req, res, next) => {
 
 });
 
+router.get('/new', (req, res, next) => {
+  res.render("customer", { title: "Cadastrar um novo cliente" });
+});
+
 module.exports = router;
