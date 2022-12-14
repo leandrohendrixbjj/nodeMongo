@@ -19,26 +19,27 @@
         <fieldset>
             <legend>Dados Cadastrais</legend>
             <p>
-                Nome: <input type="text" name="nome">
+                Nome: <input type="text" name="nome" value="<%=customer.nome%>">
             </p>
             <p>
-                Idade: <input type="number" name="idade">
+                Idade: <input type="number" name="idade" value="<%=customer.idade%>">
             </p>
             <p>
                 <label>Sexo</label>
-                <select name="sexo">
+                <select name="sexo" id="sexo">
                     <option value="M">Masculino</option>
                     <option value="F">Feminino</option>
                 </select>
             </p>
             <p>
                 <label>Região</label>
-                <select name="uf">
+                <select name="uf" id="uf">
                     <option value="SP">SP</option>
                     <option value="MG">MG</option>
                     <option value="RJ">RJ</option>
                 </select>
             </p>
+            <input type="hidden" name="id" value="<%=customer._id%>">
             <p>
                 <input type="submit" value="Salvar">
                 <a href="/">Cancelar</a>
@@ -51,6 +52,18 @@
             const error = window.location.search.split('=')[1];
             alert(decodeURI(error));
         }
+        //Set Sexo na edição
+        <%
+            if (customer.sexo) %>
+            document.getElementById("sexo").value = "<%=customer.sexo%>";
+
+        //Set Uf na edição
+        <%
+            if (customer.uf) %>
+            document.getElementById("uf").value = "<%=customer.uf%>";
+
+
+
     </script>
 </body>
 

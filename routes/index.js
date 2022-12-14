@@ -4,17 +4,19 @@ const db = require('../db.js')
 router.get('/', async (req, res, next) => {
 
   db.findSerie().then((customers) => {
+    console.log(customers);
     res.render('index', { title: 'ExpressA', customers: customers });
   }).catch(error => console.log(`Error:${error}`));
 
 });
 
 router.get('/new', (req, res, next) => {
-  res.render("customer", { title: "Cadastrar um novo cliente" });
+  res.render("customer", { title: "Cadastrar um novo cliente", customer: {} });
 });
 
-router.post("/new", (req, res, next) => {
+router.post("/new", async (req, res, next) => {
   const { idade } = req.body;
+  const { id } = req.body;
 
   if (!req.body.nome)
     return res.redirect('/new?error=Informe um nome');
@@ -24,11 +26,27 @@ router.post("/new", (req, res, next) => {
 
   req.body.idade = parseInt(idade);
 
-  db.insertCustomer(req.body)
-    .then((success) => {
-      console.log(`success:${success}`);
-      res.redirect("/")
-    }).catch(error => console.log(`ERROR:${error}`));
+  try {
+    if (!id) {
+      await db.insertCustomer(req.body);
+    } else {
+      await db.updateCustomer(id, req.body)
+    }
+    res.redirect("/");
+  } catch (error) {
+    console.log(`Error:${error}`);
+  }
+
+});
+
+router.get('/edit/:customerId', async (req, res) => {
+  const id = req.params.customerId;
+
+  try {
+    res.render("customer", { title: "Editar", customer: await db.findCustomer(id) })
+  } catch (error) {
+    console.log(`Error:${error}`);
+  }
 });
 
 module.exports = router;

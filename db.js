@@ -23,9 +23,9 @@ function updateCustomer(id, customer) {
     //Converte para objectId pq id vem como string no mongo só reconhece como object
     const objectId = new ObjectId(id);
 
-    return global.collection
-        .collection('Customers')
-        .updateOne({ _id: objectId }, { $set: customer })
+    return connection.collection('Customers').updateOne(
+        { _id: ObjectId(id) }, { $set: customer }
+    );
 }
 
 function deleteCustomer(id) {
@@ -36,5 +36,16 @@ function deleteCustomer(id) {
         .deleteOne({ _id: objectId })
 }
 
-module.exports = { findSerie, insertCustomer, updateCustomer, deleteCustomer }
+function findCustomer(id) {
+    const objectId = new ObjectId(id);
+    return connection.collection('Customers').findOne({ _id: ObjectId(id) });
+}
+
+module.exports = {
+    findSerie,
+    insertCustomer,
+    updateCustomer,
+    deleteCustomer,
+    findCustomer
+}
 
