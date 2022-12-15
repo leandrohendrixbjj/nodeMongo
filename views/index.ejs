@@ -42,6 +42,10 @@
           <td>
             <a href="/edit/<%=customer._id%>" title="Editar">Edit</a>
           </td>
+          <td>
+            <a href="/delete/<%=customer._id%>" title="Editar"
+              onclick="return confirm('Deseja excluir esse registro?');">Delete</a>
+          </td>
         </tr>
       </tbody>
       <%})%>

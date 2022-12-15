@@ -31,9 +31,9 @@ function updateCustomer(id, customer) {
 function deleteCustomer(id) {
     const objectId = new ObjectId(id);
 
-    return global.collection
-        .collection('Customers')
-        .deleteOne({ _id: objectId })
+    return connection.collection('Customers').deleteOne(
+        { _id: ObjectId(id) }
+    );
 }
 
 function findCustomer(id) {

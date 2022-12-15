@@ -49,4 +49,14 @@ router.get('/edit/:customerId', async (req, res) => {
   }
 });
 
+router.get('/delete/:customerId', async (req, res) => {
+  const { customerId } = req.params;
+  try {
+    await db.deleteCustomer(customerId);
+    res.redirect("/");
+  } catch (error) {
+    console.log(`Error:${error}`);
+  }
+});
+
 module.exports = router;
