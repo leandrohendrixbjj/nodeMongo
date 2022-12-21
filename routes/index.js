@@ -2,12 +2,13 @@ const router = require('express')();
 const db = require('../db.js')
 
 router.get('/', async (req, res, next) => {
-
-  db.findSerie().then((customers) => {
-    console.log(customers);
+  try {
+    let customers = await db.findSerie();
     res.render('index', { title: 'ExpressA', customers: customers });
-  }).catch(error => console.log(`Error:${error}`));
-
+  } catch (error) {
+    console.log(`Error:${error}`);
+    res.render("Error", { message: "Erro Listagem cliente", error });
+  }
 });
 
 router.get('/new', (req, res, next) => {
@@ -35,6 +36,7 @@ router.post("/new", async (req, res, next) => {
     res.redirect("/");
   } catch (error) {
     console.log(`Error:${error}`);
+    res.render("Error", { message: "Erro Cadastro do cliente", error });
   }
 
 });
@@ -46,6 +48,7 @@ router.get('/edit/:customerId', async (req, res) => {
     res.render("customer", { title: "Editar", customer: await db.findCustomer(id) })
   } catch (error) {
     console.log(`Error:${error}`);
+    res.render("Error", { message: "Erro Atualização cliente", error });
   }
 });
 
@@ -56,6 +59,7 @@ router.get('/delete/:customerId', async (req, res) => {
     res.redirect("/");
   } catch (error) {
     console.log(`Error:${error}`);
+    res.render("Error", { message: "Erro Remover o cliente", error });
   }
 });
 
