@@ -34,9 +34,6 @@
             <p>
                 <label>Região</label>
                 <select name="uf" id="uf">
-                    <option value="SP">SP</option>
-                    <option value="MG">MG</option>
-                    <option value="RJ">RJ</option>
                 </select>
             </p>
             <input type="hidden" name="id" value="<%=customer._id%>">
@@ -48,6 +45,23 @@
         </fieldset>
     </form>
     <script>
+        fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
+            .then(res => res.json())
+            .then(json => {
+                const siglas = json.map(item => item.sigla).sort();
+                const ufsHtml = document.getElementById("uf");
+
+                siglas.forEach(sigla => {
+                    let opt = document.createElement("option");
+                    opt.innerText = sigla;
+                    opt.value = sigla;
+                    ufsHtml.add(opt);
+                });
+                //Set Uf na edição
+                <%
+                  if (customer.uf) %>
+                    document.getElementById("uf").value = "<%=customer.uf%>";
+            }).catch(error => console.log(error))
         if (window.location.search) {
             const error = window.location.search.split('=')[1];
             alert(decodeURI(error));
@@ -57,10 +71,7 @@
             if (customer.sexo) %>
             document.getElementById("sexo").value = "<%=customer.sexo%>";
 
-        //Set Uf na edição
-        <%
-            if (customer.uf) %>
-            document.getElementById("uf").value = "<%=customer.uf%>";
+
 
 
 
